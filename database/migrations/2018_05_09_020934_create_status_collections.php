@@ -39,6 +39,7 @@ class CreateStatusCollections extends Migration
         ->table('status', function (Blueprint $collection)
         {
             $collection->dropIndex();
+            $collection->drop();
         });
     }
 }

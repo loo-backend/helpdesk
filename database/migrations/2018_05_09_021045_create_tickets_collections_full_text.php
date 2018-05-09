@@ -53,6 +53,7 @@ class CreateTicketsCollectionsFullText extends Migration
         ->table('tickets', function (Blueprint $collection)
         {
             $collection->dropIndex();
+            $collection->drop();
         });
     }
 }

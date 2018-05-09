@@ -2,9 +2,14 @@
 
 namespace Helpdesk;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Ticket extends Model
+class Ticket extends Eloquent
 {
-    //
+    protected $fillable = [
+    	'uuid',
+    	'subject',
+  		'description',
+    	'active',
+    ];
 }

@@ -39,6 +39,7 @@ class CreatePrioritiesCollections extends Migration
         ->table('priorities', function (Blueprint $collection)
         {
             $collection->dropIndex();
+            $collection->drop();
         });
     }
 }

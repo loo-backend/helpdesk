@@ -2,9 +2,13 @@
 
 namespace Helpdesk;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Priority extends Model
+class Priority extends Eloquent
 {
-    //
+    protected $fillable = [
+     	'_id',
+    	'name',
+    	'active',
+    ];
 }

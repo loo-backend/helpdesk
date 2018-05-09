@@ -39,6 +39,7 @@ class CreateDepartmentsCollections extends Migration
         ->table('departments', function (Blueprint $collection)
         {
             $collection->dropIndex();
+            $collection->drop();
         });
     }
 }
