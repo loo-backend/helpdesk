@@ -34,7 +34,7 @@ class CreateTicketsCollectionsFullText extends Migration
                 [
                     "weights" => [
                         "subject" => 32,
-                        "description" => 12
+                        "description" => 16,
                     ],
                     'name' => 'tickets_full_text'
                 ]
@@ -52,7 +52,7 @@ class CreateTicketsCollectionsFullText extends Migration
         Schema::connection($this->connection)
         ->table('tickets', function (Blueprint $collection)
         {
-            $collection->dropIndex(['tickets_full_text']);
+            $collection->dropIndex();
         });
     }
 }
