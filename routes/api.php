@@ -1,6 +1,8 @@
 <?php
 
-
-$this->middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+$this->apiResources([
+	'departments' => 'Api\DepartmentsController',
+	'tickets' => 'Api\TicketsController',
+	'priorities' => 'Api\PrioritiesController',
+	'status' => 'Api\StatusController',
+]);

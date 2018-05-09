@@ -1,7 +1,6 @@
 <?php
 
 use Faker\Generator as Faker;
-use Webpatser\Uuid\Uuid;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,43 +13,9 @@ use Webpatser\Uuid\Uuid;
 |
 */
 
-function matrizRoles() {
-
-    $rand = rand(0, 3);
-    $roles = [];
-
-    if($rand === 3) {
-
-        $roles[0]['role'] = 'ADMIN';
-        $roles[0]['permissions'][0]['permission'] = ['ALL'];
-
-    } elseif($rand=== 2) {
-
-        $roles[0]['role'] = 'ADMIN_STAFF';
-        $roles[0]['permissions'][0]['permission'] = ['BROWSER','CREATE', 'READ', 'UPDATE'];
-
-    } elseif($rand=== 1) {
-
-        $roles[0]['role'] = 'CLINIC_ADMIN';
-        $roles[0]['permissions'][0]['permission'] = ['ALL'];
 
 
-    } else {
-
-        $roles[0]['role'] = 'CLINIC_STAFF';
-        $roles[0]['permissions'][0]['permission'] = ['BROWSER','CREATE', 'READ', 'UPDATE'];
-
-        $roles[1]['role'] = 'CLINIC_DOCTOR';
-        $roles[1]['permissions'][0]['permission'] = ['BROWSER','CREATE', 'READ', 'UPDATE'];
-
-    }
-
-    return $roles;
-
-}
-
-
-$factory->define(Helpdesk\User::class, function (Faker $faker) {
+$factory->define(Helpdesk\Ticket::class, function (Faker $faker) {
 
 
     return [
