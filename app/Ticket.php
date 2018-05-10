@@ -11,11 +11,22 @@ class Ticket extends Eloquent
 	use SoftDeletes;
 
     protected $fillable = [
-    	'uuid',
-    	'subject',
-  		'description',
-    	'active',
+        'credentials_open_ticket_client',
+        'subject',
+        'description',
+        'replies',
+        'departament_id',
+        'priority_id',
+        'status_id',
+        'attachments',
+        'active',
+        'read_departament',
+        'read_staff',
+        'last_action',
+        'ip',
+        'answered_at',
     ];
+
 
     protected $dates = ['deleted_at'];
 

@@ -88,9 +88,9 @@ $factory->define(Helpdesk\Ticket::class, function (Faker $faker) {
         'subject' => $faker->sentence,
         'description' => implode(' ', $faker->paragraphs),
         'replies' => replies($faker),
-        'departamentid' => rand(1,3),
-        'priorityid' => rand(1,3),
-        'statusid' => rand(1,5),
+        'departament_id' => rand(1,3),
+        'priority_id' => rand(1,3),
+        'status_id' => rand(1,5),
         'attachments' => [
             'attachment' => rand(1,5),
             'ext' => 'jpg'

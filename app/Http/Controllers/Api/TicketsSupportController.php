@@ -5,6 +5,7 @@ namespace Helpdesk\Http\Controllers\Api;
 use Helpdesk\Http\Services\Tickets\GetAllTicketSupportService;
 use Helpdesk\Http\Services\Tickets\GetTicketIdService;
 use Helpdesk\Http\Services\Tickets\RemoveTicketIdService;
+use Helpdesk\Http\Services\Tickets\UpdateTicketIdService;
 use Illuminate\Http\Request;
 use Helpdesk\Http\Controllers\Controller;
 
@@ -12,7 +13,7 @@ class TicketsSupportController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
+     * Display a listing tickets Open.
      *
      * @param GetAllTicketSupportService $service
      * @return \Illuminate\Http\Response
@@ -29,6 +30,12 @@ class TicketsSupportController extends Controller
         return response()->json(['error' => 'ticket_not_found'], 422);
     }
 
+    /**
+     *  Display a listing tickets Closed.
+     *
+     * @param GetAllTicketSupportService $service
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function closed(GetAllTicketSupportService $service)
     {
 
@@ -92,13 +99,25 @@ class TicketsSupportController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     * @param UpdateTicketIdService $updateTicketIdService
+     * @param GetTicketIdService $getTicketIdService
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, UpdateTicketIdService $updateTicketIdService,
+                                                  GetTicketIdService $getTicketIdService)
     {
-        //
+
+        if(!$getTicketIdService->getById($id)) {
+            return response()->json(['error' => 'ticket_not_found'], 422);
+        }
+
+        if (!$ticket = $updateTicketIdService->update($request, $id)) {
+            return response()->json(['error' => 'ticket_not_update'], 500);
+        }
+
+        return response()->json(['response' => $ticket], 200);
     }
 
     /**
