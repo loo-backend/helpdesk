@@ -5,8 +5,15 @@ namespace Helpdesk\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Helpdesk\Http\Controllers\Controller;
 
-class TicketsController extends Controller
+class TicketsClientController extends Controller
 {
+
+
+    public function __construct()
+    {
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,7 @@ class TicketsController extends Controller
      */
     public function index()
     {
-        //
+        echo 'teste';
     }
 
     /**

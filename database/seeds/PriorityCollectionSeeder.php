@@ -31,20 +31,20 @@ class PriorityCollectionSeeder extends Seeder
     {
     	return [
 
-    		[
+            [
                 'code' => 1,
-    			'name' => 'Baixa',
-    		],
+                'name' => 'Alta',
+            ],
 
     		[
                 'code' => 2,
     			'name' => 'Média',
     		],
 
-    		[
+            [
                 'code' => 3,
-    			'name' => 'Alta',
-    		],
+                'name' => 'Baixa',
+            ],
 
     	];
 

@@ -7,6 +7,7 @@ use Helpdesk\Http\Controllers\Controller;
 
 class DepartmentsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *

@@ -2,6 +2,7 @@
 
 use Faker\Generator as Faker;
 use Webpatser\Uuid\Uuid;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,13 +53,13 @@ function replies(Faker $faker)
                 'attachment' => rand(1,5),
                 'ext' => 'jpg'
             ],
-            'credentialsTicketShop' => [
-                'staffShopUuid' => $faker->uuid,
+            'credentials_ticket_client' => [
+                'staff_client_uuid' => $faker->uuid,
                 'name' => $faker->name,
                 'email' => $faker->email,
             ],
-            'credentialsDepartment' => [
-                'staffUuid' => $faker->uuid,
+            'credentials_department' => [
+                'staff_uuid' => $faker->uuid,
                 'name' => $faker->name,
                 'email' => $faker->email,
             ],
@@ -78,42 +79,29 @@ $factory->define(Helpdesk\Ticket::class, function (Faker $faker) {
 
     return [
         '_id' => Uuid::generate(4)->string,
-        'credentialsOpenTicketShop' => [
-            'shopName' => $faker->company,
-            'shopUrl' => $faker->url,
-            'shopUuid' => $faker->uuid,
-            'staffShopUuid' => $faker->uuid,
+        'credentials_open_ticket_client' => [
+            'client_name' => $faker->company,
+            'client_url' => $faker->url,
+            'client_uuid' => $faker->uuid,
+            'client_staff_uuid' => $faker->uuid,
         ],
         'subject' => $faker->sentence,
         'description' => implode(' ', $faker->paragraphs),
         'replies' => replies($faker),
-        'departamentId' => rand(1,3),
-        'priorityId' => rand(1,3),
-        'statusId' => rand(1,5),
+        'departamentid' => rand(1,3),
+        'priorityid' => rand(1,3),
+        'statusid' => rand(1,5),
         'attachments' => [
             'attachment' => rand(1,5),
             'ext' => 'jpg'
         ],
         'active' => rand(0,5) > 0 ? true : false,
-        'readDepartament' => rand(0,1),
-        'readStaff' => rand(0,1),
-        'lastAction' => array_random(['DEPARTAMENT', 'STAFF']),
+        'read_departament' => rand(0,1),
+        'read_staff' => rand(0,1),
+        'last_action' => array_random(['department', 'staff']),
         'ip' => $faker->ipv4,
+        'answered_at' => date('Y-d-m H:i:s'),
 
     ];
 
 });
-
-// $factory->define(Helpdesk\Ticket::class, function (Faker $faker) {
-
-//     return [
-//         '_id' => $faker->uuid,
-//         'usuario' => rand(1,3),
-//         'produto_id' => function () {
-//             return factory(Helpdesk\Produto::class)->create()->id;
-//         },
-//         'quantidade' => $faker->randomNumber(2)
-
-//     ];
-
-// });
