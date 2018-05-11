@@ -4,6 +4,7 @@ namespace Helpdesk;
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Jenssegers\Mongodb\Eloquent\SoftDeletes;
+//use Helpdesk\TicketReply;
 
 class Ticket extends Eloquent
 {
@@ -36,5 +37,10 @@ class Ticket extends Eloquent
         $query->getQuery()->projections = ['score'=>['$meta'=>'textScore']];
 
         return $query->whereRaw(array('$text' => array('$search' => $search)));
+    }
+
+    public function replies()
+    {
+        return $this->embedsMany(TicketReply::class);
     }
 }

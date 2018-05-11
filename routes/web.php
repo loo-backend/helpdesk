@@ -14,3 +14,20 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/migrate', function () {
+    Artisan::call('migrate', [
+        '--path'     => "app/database/migrations"
+    ]);
+});
+
+Route::get('/migrate/refresh', function () {
+    Artisan::call('migrate:refresh');
+    Artisan::call('db:seed');
+});
+
+
+Route::get('/seed', function () {
+    Artisan::call('db:seed');
+});

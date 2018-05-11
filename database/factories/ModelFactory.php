@@ -40,42 +40,7 @@ $factory->define(Helpdesk\Status::class, function (Faker $faker) {
 
 });
 
-function replies(Faker $faker)
-{
-
-    $array_data = [];
-
-    for ($i=0; $i < rand(3,10) ; $i++) {
-
-        $reply =  [
-            'description'  => implode(' ', $faker->paragraphs),
-            'attachments' => [
-                'attachment' => rand(1,5),
-                'ext' => 'jpg'
-            ],
-            'credentials_ticket_client' => [
-                'staff_client_uuid' => $faker->uuid,
-                'name' => $faker->name,
-                'email' => $faker->email,
-            ],
-            'credentials_department' => [
-                'staff_uuid' => $faker->uuid,
-                'name' => $faker->name,
-                'email' => $faker->email,
-            ],
-            'ip' => $faker->ipv4,
-        ];
-
-        array_push($array_data, $reply);
-
-    }
-
-    return $array_data;
-}
-
-
 $factory->define(Helpdesk\Ticket::class, function (Faker $faker) {
-
 
     return [
         '_id' => Uuid::generate(4)->string,
@@ -87,7 +52,6 @@ $factory->define(Helpdesk\Ticket::class, function (Faker $faker) {
         ],
         'subject' => $faker->sentence,
         'description' => implode(' ', $faker->paragraphs),
-        'replies' => replies($faker),
         'departament_id' => rand(1,3),
         'priority_id' => rand(1,3),
         'status_id' => rand(1,5),
