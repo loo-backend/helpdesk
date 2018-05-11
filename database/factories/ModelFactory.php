@@ -43,7 +43,6 @@ $factory->define(Helpdesk\Status::class, function (Faker $faker) {
 $factory->define(Helpdesk\Ticket::class, function (Faker $faker) {
 
     return [
-        '_id' => Uuid::generate(4)->string,
         'credentials_open_ticket_client' => [
             'client_name' => $faker->company,
             'client_url' => $faker->url,
@@ -62,7 +61,7 @@ $factory->define(Helpdesk\Ticket::class, function (Faker $faker) {
         'active' => rand(0,5) > 0 ? true : false,
         'read_departament' => rand(0,1),
         'read_staff' => rand(0,1),
-        'last_action' => array_random(['department', 'staff']),
+        'last_action' => array_random(['support', 'client']),
         'ip' => $faker->ipv4,
         'answered_at' => date('Y-d-m H:i:s'),
 

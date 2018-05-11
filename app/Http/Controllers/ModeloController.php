@@ -1,19 +1,11 @@
 <?php
 
-namespace Helpdesk\Http\Controllers\Api;
+namespace Helpdesk\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Helpdesk\Http\Controllers\Controller;
 
-class TicketsClientController extends Controller
+class ModeloController extends Controller
 {
-
-
-    public function __construct()
-    {
-
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +13,17 @@ class TicketsClientController extends Controller
      */
     public function index()
     {
-        echo 'teste';
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**

@@ -4,7 +4,6 @@ namespace Helpdesk;
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Jenssegers\Mongodb\Eloquent\SoftDeletes;
-//use Helpdesk\TicketReply;
 
 class Ticket extends Eloquent
 {
@@ -28,19 +27,24 @@ class Ticket extends Eloquent
         'answered_at',
     ];
 
-
     protected $dates = ['deleted_at'];
 
     public function scopeWhereFullText($query, $search)
     {
 
-        $query->getQuery()->projections = ['score'=>['$meta'=>'textScore']];
+        $query->getQuery()->projections = [
+            'score' => [ '$meta'=>'textScore' ]
+        ];
 
-        return $query->whereRaw(array('$text' => array('$search' => $search)));
+        return $query->whereRaw([
+            '$text' => [ '$search' => $search ]
+        ]);
+
     }
 
     public function replies()
     {
         return $this->embedsMany(TicketReply::class);
     }
+
 }
