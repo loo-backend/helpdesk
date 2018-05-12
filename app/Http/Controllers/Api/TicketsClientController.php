@@ -2,28 +2,27 @@
 
 namespace Helpdesk\Http\Controllers\Api;
 
-use Helpdesk\Http\Services\Tickets\CreateTicketClientService;
-use Helpdesk\Http\Services\Tickets\GetAllTicketClientService;
-use Helpdesk\Http\Services\Tickets\GetTicketClientIdService;
-use Helpdesk\Http\Services\Tickets\GetTicketIdService;
-use Helpdesk\Http\Services\Tickets\UpdateTicketIdService;
+use Helpdesk\Http\Services\Tickets\TicketClientCreateService;
+use Helpdesk\Http\Services\Tickets\TicketClientListAndPaginateService;
+use Helpdesk\Http\Services\Tickets\TicketClientFindService;
+use Helpdesk\Http\Services\Tickets\TicketClientUpdateService;
 use Illuminate\Http\Request;
 use Helpdesk\Http\Controllers\Controller;
 
-class TicketsClientsController extends Controller
+class TicketsClientController extends Controller
 {
 
     /**
      * Display a listing tickets Open.
      *
      * @param Request $request
-     * @param GetAllTicketClientService $service
+     * @param TicketClientListAndPaginateService $service
      * @return \Illuminate\Http\Response
      */
-    public function open(Request $request, GetAllTicketClientService $service)
+    public function open(Request $request, TicketClientListAndPaginateService $service)
     {
 
-        if (!$result = $service->getAllOpen($request)) {
+        if (!$result = $service->open($request)) {
             return response()->json(['error' => 'ticket_not_found'], 422);
         }
 
@@ -35,13 +34,13 @@ class TicketsClientsController extends Controller
      *  Display a listing tickets Closed.
      *
      * @param Request $request
-     * @param GetAllTicketClientService $service
+     * @param TicketClientListAndPaginateService $service
      * @return \Illuminate\Http\JsonResponse
      */
-    public function closed(Request $request, GetAllTicketClientService $service)
+    public function closed(Request $request, TicketClientListAndPaginateService $service)
     {
 
-        if (!$result = $service->getAllClosed($request)) {
+        if (!$result = $service->closed($request)) {
 
             return response()->json(['error' => 'ticket_not_found'], 422);
         }
@@ -55,13 +54,13 @@ class TicketsClientsController extends Controller
      * Display a listing of the resource.
      *
      * @param Request $request
-     * @param GetAllTicketClientService $service
+     * @param TicketClientListAndPaginateService $service
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, GetAllTicketClientService $service)
+    public function index(Request $request, TicketClientListAndPaginateService $service)
     {
 
-        if (!$result = $service->getAll($request)) {
+        if (!$result = $service->all($request)) {
             return response()->json(['error' => 'ticket_not_found'], 422);
         }
 
@@ -84,14 +83,14 @@ class TicketsClientsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @param CreateTicketClientService $service
+     * @param TicketClientCreateService $service
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function store(Request $request, CreateTicketClientService $service)
+    public function store(Request $request, TicketClientCreateService $service)
     {
 
-        if (!$result = $service->make($request)) {
+        if (!$result = $service->create($request)) {
 
             return response()->json(['error' => 'ticket_not_created'], 500);
         }
@@ -105,13 +104,13 @@ class TicketsClientsController extends Controller
      *
      * @param $id
      * @param Request $request
-     * @param GetTicketClientIdService $service
+     * @param TicketClientFindService $service
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id, Request $request, GetTicketClientIdService $service)
+    public function show($id, Request $request, TicketClientFindService $service)
     {
 
-        if (!$result = $service->getByIdAndCredentialsOpenTicket($id, $request)) {
+        if (!$result = $service->findByAndCredentialsClient($id, $request)) {
 
             return response()->json(['error' => 'ticket_not_found'], 422);
         }
@@ -125,20 +124,21 @@ class TicketsClientsController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
-     * @param UpdateTicketIdService $updateTicketIdService
-     * @param GetTicketIdService $getTicketIdService
+     * @param TicketClientUpdateService $ticketClientUpdateService
+     * @param TicketClientFindService $ticketClientFindService
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id,
-        UpdateTicketIdService $updateTicketIdService,
-        GetTicketIdService $getTicketIdService)
+        TicketClientUpdateService $ticketClientUpdateService,
+        TicketClientFindService $ticketClientFindService)
     {
 
-        if(!$getTicketIdService->getById($id)) {
+        if(!$ticketClientFindService->findBy($id)) {
             return response()->json(['error' => 'ticket_not_found'], 422);
         }
 
-        if (!$ticket = $updateTicketIdService->update($request, $id)) {
+        if (!$ticket = $ticketClientUpdateService->update($request, $id)) {
             return response()->json(['error' => 'ticket_not_update'], 500);
         }
 

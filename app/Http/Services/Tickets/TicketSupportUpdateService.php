@@ -7,22 +7,8 @@ namespace Helpdesk\Http\Services\Tickets;
 use Helpdesk\Ticket;
 use Illuminate\Http\Request;
 
-class UpdateTicketIdService
+class TicketSupportUpdateService
 {
-
-    /**
-     * @var Ticket
-     */
-    private $ticket;
-
-    /**
-     * GetAllTicketsStaffService constructor.
-     * @param Ticket $ticket
-     */
-    public function __construct(Ticket $ticket)
-    {
-        $this->ticket = $ticket;
-    }
 
     /**
      * @param Request $request
@@ -32,7 +18,7 @@ class UpdateTicketIdService
     public function update(Request $request, $id)
     {
 
-        $ticket = $this->ticket->find($id);
+        $ticket = Ticket::find($id);
 
         if ($ticket) {
 

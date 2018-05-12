@@ -2,7 +2,7 @@
 
 $this->apiResources([
     'departments' => 'Api\DepartmentsController',
-    'tickets' => 'Api\TicketsClientsController',
+    'tickets' => 'Api\TicketsClientController',
     'priorities' => 'Api\PrioritiesController',
     'status' => 'Api\StatusController',
 ]);

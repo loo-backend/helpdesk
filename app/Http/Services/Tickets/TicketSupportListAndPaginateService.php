@@ -3,9 +3,8 @@
 namespace Helpdesk\Http\Services\Tickets;
 
 use Helpdesk\Ticket;
-use Illuminate\Http\Request;
 
-class GetAllTicketClientService
+class TicketSupportListAndPaginateService
 {
 
     private $select = [
@@ -39,19 +38,15 @@ class GetAllTicketClientService
     }
 
     /**
-     * Return All Ticket
+     *  Return All Ticket
      *
-     * @param Request $request
      * @return mixed
      */
-    public function getAll(Request $request)
+    public function all()
     {
 
         return $this->ticket
             ->select($this->select)
-            ->where([
-                'credentials_open_ticket_client.client_uuid' => $request->get('client_uuid')
-            ])
             ->where('active', true)
             ->where('status_id', '!=', 4)
             ->orderBy('answered_at', 'ASC')
@@ -61,19 +56,15 @@ class GetAllTicketClientService
     }
 
     /**
-     * Return Tickets Open
+     * Return Ticket Open
      *
-     * @param Request $request
      * @return mixed
      */
-    public function getAllOpen(Request $request)
+    public function open()
     {
 
         return $this->ticket
             ->select($this->select)
-            ->where([
-                'credentials_open_ticket_client.client_uuid' => $request->get('client_uuid')
-            ])
             ->where('active', true)
             ->where('status_id', '!=', 4)
             ->orderBy('answered_at', 'ASC')
@@ -85,17 +76,13 @@ class GetAllTicketClientService
     /**
      * Return Tickets Closed
      *
-     * @param Request $request
      * @return mixed
      */
-    public function getAllClosed(Request $request)
+    public function closed()
     {
 
         return $this->ticket
             ->select($this->select)
-            ->where([
-                'credentials_open_ticket_client.client_uuid' => $request->get('client_uuid')
-            ])
             ->where('active', true)
             ->where('status_id', '=', 4)
             ->orderBy('answered_at', 'ASC')
@@ -103,4 +90,5 @@ class GetAllTicketClientService
             ->orderBy('created_at', 'ASC')
             ->paginate();
     }
+
 }

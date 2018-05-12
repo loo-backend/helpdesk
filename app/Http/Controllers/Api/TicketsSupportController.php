@@ -2,10 +2,10 @@
 
 namespace Helpdesk\Http\Controllers\Api;
 
-use Helpdesk\Http\Services\Tickets\GetAllTicketSupportService;
-use Helpdesk\Http\Services\Tickets\GetTicketIdService;
-use Helpdesk\Http\Services\Tickets\RemoveTicketIdService;
-use Helpdesk\Http\Services\Tickets\UpdateTicketIdService;
+use Helpdesk\Http\Services\Tickets\TicketSupportListAndPaginateService;
+use Helpdesk\Http\Services\Tickets\TicketSupportFindService;
+use Helpdesk\Http\Services\Tickets\TicketSupportRemoveService;
+use Helpdesk\Http\Services\Tickets\TicketSupportUpdateService;
 use Illuminate\Http\Request;
 use Helpdesk\Http\Controllers\Controller;
 
@@ -15,13 +15,13 @@ class TicketsSupportController extends Controller
     /**
      * Display a listing tickets Open.
      *
-     * @param GetAllTicketSupportService $service
+     * @param TicketSupportListAndPaginateService $service
      * @return \Illuminate\Http\Response
      */
-    public function open(GetAllTicketSupportService $service)
+    public function open(TicketSupportListAndPaginateService $service)
     {
 
-        if (!$result = $service->getAllOpen()) {
+        if (!$result = $service->open()) {
             return response()->json(['error' => 'ticket_not_found'], 422);
         }
 
@@ -32,13 +32,13 @@ class TicketsSupportController extends Controller
     /**
      *  Display a listing tickets Closed.
      *
-     * @param GetAllTicketSupportService $service
+     * @param TicketSupportListAndPaginateService $service
      * @return \Illuminate\Http\JsonResponse
      */
-    public function closed(GetAllTicketSupportService $service)
+    public function closed(TicketSupportListAndPaginateService $service)
     {
 
-        if (!$result = $service->getAllClosed()) {
+        if (!$result = $service->closed()) {
             return response()->json(['error' => 'ticket_not_found'], 422);
         }
 
@@ -50,13 +50,13 @@ class TicketsSupportController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param GetAllTicketSupportService $service
+     * @param TicketSupportListAndPaginateService $service
      * @return \Illuminate\Http\Response
      */
-    public function index(GetAllTicketSupportService $service)
+    public function index(TicketSupportListAndPaginateService $service)
     {
 
-        if (!$result = $service->getAll()) {
+        if (!$result = $service->all()) {
             return response()->json(['error' => 'ticket_not_found'], 422);
         }
 
@@ -78,13 +78,13 @@ class TicketsSupportController extends Controller
      * Display the specified resource.
      *
      * @param  int $id
-     * @param GetTicketIdService $service
+     * @param TicketSupportFindService $service
      * @return \Illuminate\Http\Response
      */
-    public function show($id, GetTicketIdService $service)
+    public function show($id, TicketSupportFindService $service)
     {
 
-        if ($result = $service->getById($id)) {
+        if ($result = $service->findBy($id)) {
             return response()->json(['error' => 'ticket_not_found'], 422);
         }
 
@@ -96,20 +96,20 @@ class TicketsSupportController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
-     * @param UpdateTicketIdService $updateTicketIdService
-     * @param GetTicketIdService $getTicketIdService
+     * @param TicketSupportUpdateService $ticketSupportUpdateService
+     * @param TicketSupportFindService $ticketSupportFindService
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id,
-        UpdateTicketIdService $updateTicketIdService,
-        GetTicketIdService $getTicketIdService)
+        TicketSupportUpdateService $ticketSupportUpdateService,
+        TicketSupportFindService $ticketSupportFindService)
     {
 
-        if(!$getTicketIdService->getById($id)) {
+        if(!$ticketSupportFindService->findBy($id)) {
             return response()->json(['error' => 'ticket_not_found'], 422);
         }
 
-        if (!$ticket = $updateTicketIdService->update($request, $id)) {
+        if (!$ticket = $ticketSupportUpdateService->update($request, $id)) {
             return response()->json(['error' => 'ticket_not_update'], 500);
         }
 
@@ -120,19 +120,19 @@ class TicketsSupportController extends Controller
      * Remove the specified resource from storage.
      *
      * @param $id
-     * @param RemoveTicketIdService $removeTicketIdService
-     * @param GetTicketIdService $getTicketIdService
+     * @param TicketSupportRemoveService $ticketSupportRemoveService
+     * @param TicketSupportFindService $ticketSupportFindService
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id, RemoveTicketIdService $removeTicketIdService,
-                                 GetTicketIdService $getTicketIdService)
+    public function destroy($id, TicketSupportRemoveService $ticketSupportRemoveService,
+                                 TicketSupportFindService $ticketSupportFindService)
     {
 
-        if(!$getTicketIdService->getById($id)) {
+        if(!$ticketSupportFindService->findBy($id)) {
             return response()->json(['error' => 'ticket_not_found'], 422);
         }
 
-        if (!$ticket = $removeTicketIdService->remove($id)) {
+        if (!$ticket = $ticketSupportRemoveService->remove($id)) {
             return response()->json(['error' => 'ticket_not_delete'], 500);
         }
 

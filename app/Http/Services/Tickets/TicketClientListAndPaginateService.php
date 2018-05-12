@@ -3,8 +3,9 @@
 namespace Helpdesk\Http\Services\Tickets;
 
 use Helpdesk\Ticket;
+use Illuminate\Http\Request;
 
-class GetAllTicketSupportService
+class TicketClientListAndPaginateService
 {
 
     private $select = [
@@ -38,15 +39,19 @@ class GetAllTicketSupportService
     }
 
     /**
-     *  Return All Ticket
+     * Return All Ticket
      *
+     * @param Request $request
      * @return mixed
      */
-    public function getAll()
+    public function all(Request $request)
     {
 
         return $this->ticket
             ->select($this->select)
+            ->where([
+                'credentials_open_ticket_client.client_uuid' => $request->get('client_uuid')
+            ])
             ->where('active', true)
             ->where('status_id', '!=', 4)
             ->orderBy('answered_at', 'ASC')
@@ -56,15 +61,19 @@ class GetAllTicketSupportService
     }
 
     /**
-     * Return Ticket Open
+     * Return Tickets Open
      *
+     * @param Request $request
      * @return mixed
      */
-    public function getAllOpen()
+    public function open(Request $request)
     {
 
         return $this->ticket
             ->select($this->select)
+            ->where([
+                'credentials_open_ticket_client.client_uuid' => $request->get('client_uuid')
+            ])
             ->where('active', true)
             ->where('status_id', '!=', 4)
             ->orderBy('answered_at', 'ASC')
@@ -76,13 +85,17 @@ class GetAllTicketSupportService
     /**
      * Return Tickets Closed
      *
+     * @param Request $request
      * @return mixed
      */
-    public function getAllClosed()
+    public function closed(Request $request)
     {
 
         return $this->ticket
             ->select($this->select)
+            ->where([
+                'credentials_open_ticket_client.client_uuid' => $request->get('client_uuid')
+            ])
             ->where('active', true)
             ->where('status_id', '=', 4)
             ->orderBy('answered_at', 'ASC')
@@ -90,5 +103,4 @@ class GetAllTicketSupportService
             ->orderBy('created_at', 'ASC')
             ->paginate();
     }
-
 }

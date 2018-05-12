@@ -43,7 +43,7 @@ $factory->define(Helpdesk\Status::class, function (Faker $faker) {
 $factory->define(Helpdesk\Ticket::class, function (Faker $faker) {
 
     return [
-        'credentials_open_ticket_client' => [
+        'credentials_open_ticket' => [
             'client_name' => $faker->company,
             'client_url' => $faker->url,
             'client_uuid' => $faker->uuid,
