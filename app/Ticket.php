@@ -10,7 +10,7 @@ class Ticket extends Eloquent
 
 	use SoftDeletes;
 
-    public $structureCollection = [
+    public $shelmaCollection = [
         'submitted_by',
         'credentials' => [
             'client_name',
@@ -20,26 +20,28 @@ class Ticket extends Eloquent
         ],
         'subject',
         'description',
+        'attachments' => [
+            'attachment',
+            'ext',
+        ],
         'replies' => [
 
-            'description',
-            'attachments' => [
-                'attachment',
-                'ext',
-            ],
             'submitted_by',
             'credentials' => [
                 'staff_uuid',
                 'name',
                 'email'
             ],
+            'description',
+            'attachments' => [
+                'attachment',
+                'ext',
+            ],
             'ip'
-
         ],
         'departament_id',
         'priority_id',
         'status_id',
-        'attachments',
         'active',
         'read_support',
         'read_client',
@@ -53,11 +55,11 @@ class Ticket extends Eloquent
         'credentials',
         'subject',
         'description',
+        'attachments',
         'replies',
         'departament_id',
         'priority_id',
         'status_id',
-        'attachments',
         'active',
         'read_support',
         'read_client',

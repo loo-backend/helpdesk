@@ -10,6 +10,7 @@ class TicketSupportListAndPaginateService
     private $select = [
         '_id',
         'submitted_by',
+        'credentials',
         'subject',
         'description',
         'credentials',

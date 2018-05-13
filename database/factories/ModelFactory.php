@@ -43,15 +43,22 @@ $factory->define(Helpdesk\Status::class, function (Faker $faker) {
 
 $factory->define(Helpdesk\Ticket::class, function (Faker $faker) {
 
+    $img = rand(0,5);
+
     return [
         'submitted_by' => array_random(['support', 'client']),
         'credentials' => [
-            'staff_uuid' => $faker->uuid,
-            'name' => $faker->name,
-            'email' => $faker->email,
+            'client_name' => $faker->company,
+            'client_url' => $faker->url,
+            'client_uuid' => $faker->uuid,
+            'client_staff_uuid' => $faker->uuid,
         ],
         'subject' => $faker->sentence,
         'description' => implode(' ', $faker->paragraphs),
+        'attachments' => [
+            'attachment' => $img > 0 ? $img : '',
+            'ext' => $img > 0 ? 'jpg' : ''
+        ],
         'departament_id' => rand(1,3),
         'priority_id' => rand(1,3),
         'status_id' => rand(1,5),

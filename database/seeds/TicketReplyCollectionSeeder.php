@@ -33,18 +33,19 @@ class TicketReplyCollectionSeeder extends Seeder
     private function replies(Faker $faker)
     {
 
-        return [
+        $img = rand(0,5);
 
-            'description'  => implode(' ', $faker->paragraphs),
-            'attachments' => [
-                'attachment' => rand(1,5),
-                'ext' => 'jpg'
-            ],
+        return [
             'submitted_by' => array_random(['support', 'client']),
             'credentials' => [
                 'staff_uuid' => $faker->uuid,
                 'name' => $faker->name,
                 'email' => $faker->email,
+            ],
+            'description'  => implode(' ', $faker->paragraphs),
+            'attachments' => [
+                'attachment' => $img > 0 ? $img : '',
+                'ext' => $img > 0 ? 'jpg' : ''
             ],
             'ip' => $faker->ipv4,
 

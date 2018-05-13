@@ -44,25 +44,16 @@ class TicketClientCreateService
     }
 
 
-    private function credentials() {
+    // private function credentials() {
 
-        return [
-            'credentials' => [
-                'client_name' => '$faker->company',
-                'client_url' => '$faker->url',
-                'client_uuid' => '$faker->uuid',
-                'client_staff_uuid' => '$faker->uuid',
-            ]
-        ];
+    //     return [
+    //         'credentials' => [
+    //             'client_name' => '$faker->company',
+    //             'client_url' => '$faker->url',
+    //             'client_uuid' => '$faker->uuid',
+    //             'client_staff_uuid' => '$faker->uuid',
+    //         ]
+    //     ];
 
-        // return [
-        //     'credentials' => [
-        //         'client_name' => '$faker->company',
-        //         'client_url' => '$faker->url',
-        //         'client_uuid' => '$faker->uuid',
-        //         'client_staff_uuid' => '$faker->uuid',
-        //     ]
-        // ];
-
-    }
+    // }
 }
