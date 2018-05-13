@@ -143,17 +143,7 @@ class TicketsClientController extends Controller
         }
 
         return response()->json(['response' => $ticket], 200);
-    }
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param $id
-     */
-    public function destroy($id)
-    {
-        //
     }
 
 }

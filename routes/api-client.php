@@ -1,9 +1,15 @@
 <?php
 
-$this->apiResources([
-    'departments' => 'Api\DepartmentsController',
-    'tickets' => 'Api\TicketsClientController',
-    'priorities' => 'Api\PrioritiesController',
-    'status' => 'Api\StatusController',
-]);
+$this->name('tickets.open')->get('/tickets/status/open', 'Api\TicketsClientController@open');
+$this->name('tickets.closed')->get('/tickets/status/closed', 'Api\TicketsClientController@closed');
 
+// $this->apiResources([
+//     'tickets' => 'Api\TicketsClientController',
+//     //'departments' => 'Api\DepartmentsController',
+//     //'priorities' => 'Api\PrioritiesController',
+//     //'status' => 'Api\StatusController',
+// ]);
+
+Route::resource('tickets', 'Api\TicketsClientController')->except([
+    'destroy', 'edit'
+]);

@@ -103,4 +103,5 @@ class TicketClientListAndPaginateService
             ->orderBy('created_at', 'ASC')
             ->paginate();
     }
+
 }

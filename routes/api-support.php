@@ -4,9 +4,7 @@
 $this->name('tickets.open')->get('/tickets/status/open', 'Api\TicketsSupportController@open');
 $this->name('tickets.closed')->get('/tickets/status/closed', 'Api\TicketsSupportController@closed');
 
-$this->apiResources([
-	'departments' => 'Api\DepartmentsController',
-    'tickets' => 'Api\TicketsSupportController',
-	'priorities' => 'Api\PrioritiesController',
-	'status' => 'Api\StatusController',
+
+Route::resource('tickets', 'Api\TicketsSupportController')->except([
+    'create', 'edit', 'store'
 ]);

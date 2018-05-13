@@ -2,7 +2,6 @@
 
 namespace Helpdesk\Http\Services\Tickets;
 
-
 use Helpdesk\Ticket;
 use Illuminate\Http\Request;
 

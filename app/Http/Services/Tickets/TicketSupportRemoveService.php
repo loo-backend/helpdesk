@@ -2,7 +2,6 @@
 
 namespace Helpdesk\Http\Services\Tickets;
 
-
 use Helpdesk\Ticket;
 
 class TicketSupportRemoveService
@@ -25,4 +24,5 @@ class TicketSupportRemoveService
 
         return false;
     }
+
 }

@@ -61,17 +61,7 @@ class TicketsSupportController extends Controller
         }
 
         return response()->json($result, 200);
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -89,6 +79,7 @@ class TicketsSupportController extends Controller
         }
 
         return response()->json($result, 200);
+
     }
 
     /**
@@ -114,6 +105,7 @@ class TicketsSupportController extends Controller
         }
 
         return response()->json(['response' => $ticket], 200);
+
     }
 
     /**
