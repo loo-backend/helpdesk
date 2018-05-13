@@ -2,9 +2,14 @@
 
 namespace Helpdesk;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class CredentialsOpenTicket extends Model
+class CredentialsOpenTicket extends Eloquent
 {
-    protected $table = 'credentials_open_ticket';
+    protected $table = 'credentials';
+
+    protected $fillable = [
+        'credentials'
+    ];
+
 }

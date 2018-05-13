@@ -9,15 +9,15 @@ class TicketSupportListAndPaginateService
 
     private $select = [
         '_id',
+        'submitted_by',
         'subject',
         'description',
-        'credentials_open_ticket_client',
+        'credentials',
         'departament_id',
         'priority_id',
         'status_id',
-        'read_departament',
-        'read_staff',
-        'last_action',
+        'read_support',
+        'read_client',
         'answered_at',
         'updated_at',
         'created_at'

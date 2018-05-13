@@ -2,10 +2,13 @@
 
 namespace Helpdesk\Http\Services\Tickets;
 
+use Helpdesk\CredentialsOpenTicket;
 use Helpdesk\Ticket;
 use Illuminate\Http\Request;
 
-class TicketClientCreateService
+use Faker\Generator as Faker;
+
+class TicketClientCreateReplyService
 {
 
     /**
@@ -15,27 +18,31 @@ class TicketClientCreateService
      * @return bool
      * @throws \Exception
      */
+
     public function create(Request $request)
     {
 
-        $data = [
-            'subject' => $request->input('subject'),
-            'description' => $request->input('description'),
-            'departament_id' => $request->input('departament_id'),
-            'priority_id' => $request->input('priority_id'),
-            'status_id' => $request->input('status_id'),
-            'active' => true,
-            'read_support' => false,
-            'read_client' => true,
-            'last_action' => 'client',
-            'ip' => $request->ip(),
-            'answered_at' => date('Y-d-m H:i:s'),
-        ];
+        $ticket = Ticket::find($request->input('_id'));
 
-        if(!$create = Ticket::create($data) ) {
+        if (!$create = $ticket->credentials()->create($request->all())) {
             return false;
         }
 
         return $create;
     }
+
+
+    private function credentials() {
+
+        return [
+            'credentials' => [
+                'client_name' => '$faker->company',
+                'client_url' => '$faker->url',
+                'client_uuid' => '$faker->uuid',
+                'client_staff_uuid' => '$faker->uuid',
+            ]
+        ];
+
+    }
+
 }

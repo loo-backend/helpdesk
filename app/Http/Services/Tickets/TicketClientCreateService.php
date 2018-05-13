@@ -19,6 +19,7 @@ class TicketClientCreateService
     {
 
         $data = [
+            'submitted_by' => $request->input('submitted_by')
             'subject' => $request->input('subject'),
             'description' => $request->input('description'),
             'departament_id' => $request->input('departament_id'),
@@ -27,7 +28,6 @@ class TicketClientCreateService
             'active' => true,
             'read_support' => false,
             'read_client' => true,
-            'last_action' => 'client',
             'ip' => $request->ip(),
             'answered_at' => date('Y-d-m H:i:s'),
         ];
@@ -36,6 +36,33 @@ class TicketClientCreateService
             return false;
         }
 
+
+        $create->credentials()->create($request)
+
+
         return $create;
+    }
+
+
+    private function credentials() {
+
+        return [
+            'credentials' => [
+                'client_name' => '$faker->company',
+                'client_url' => '$faker->url',
+                'client_uuid' => '$faker->uuid',
+                'client_staff_uuid' => '$faker->uuid',
+            ]
+        ];
+
+        // return [
+        //     'credentials' => [
+        //         'client_name' => '$faker->company',
+        //         'client_url' => '$faker->url',
+        //         'client_uuid' => '$faker->uuid',
+        //         'client_staff_uuid' => '$faker->uuid',
+        //     ]
+        // ];
+
     }
 }

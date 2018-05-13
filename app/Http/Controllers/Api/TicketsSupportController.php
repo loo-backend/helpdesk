@@ -74,7 +74,7 @@ class TicketsSupportController extends Controller
     public function show($id, TicketSupportFindService $service)
     {
 
-        if ($result = $service->findBy($id)) {
+        if (!$result = $service->findBy($id)) {
             return response()->json(['error' => 'ticket_not_found'], 422);
         }
 

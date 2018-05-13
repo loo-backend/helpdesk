@@ -22,7 +22,7 @@ class TicketReplyCollectionSeeder extends Seeder
             for ($i=0; $i < rand(3,10) ; $i++) {
 
                 $reply = new TicketReply( $this->replies( $faker ) );
-                $reply = $ticket->replies()->save($reply);
+                $ticket->replies()->save($reply);
 
             }
 
@@ -31,25 +31,23 @@ class TicketReplyCollectionSeeder extends Seeder
     }
 
     private function replies(Faker $faker)
-    {      
+    {
 
         return [
+
             'description'  => implode(' ', $faker->paragraphs),
             'attachments' => [
                 'attachment' => rand(1,5),
                 'ext' => 'jpg'
             ],
-            'credentials_ticket_client' => [
-                'staff_client_uuid' => $faker->uuid,
-                'name' => $faker->name,
-                'email' => $faker->email,
-            ],
-            'credentials_department' => [
+            'submitted_by' => array_random(['support', 'client']),
+            'credentials' => [
                 'staff_uuid' => $faker->uuid,
                 'name' => $faker->name,
                 'email' => $faker->email,
             ],
             'ip' => $faker->ipv4,
+
         ];
 
     }

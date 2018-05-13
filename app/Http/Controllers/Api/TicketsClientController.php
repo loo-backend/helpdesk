@@ -2,6 +2,7 @@
 
 namespace Helpdesk\Http\Controllers\Api;
 
+use Helpdesk\Http\Services\Tickets\TicketClientCreateReplyService;
 use Helpdesk\Http\Services\Tickets\TicketClientCreateService;
 use Helpdesk\Http\Services\Tickets\TicketClientListAndPaginateService;
 use Helpdesk\Http\Services\Tickets\TicketClientFindService;
@@ -70,16 +71,6 @@ class TicketsClientController extends Controller
 
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
@@ -96,6 +87,29 @@ class TicketsClientController extends Controller
         }
 
         return response()->json(['response' => $result], 201);
+
+    }
+
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @param Request $request
+     * @param TicketClientCreateReplyService $service
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function reply(Request $request, TicketClientCreateReplyService $service)
+    {
+
+        if (!$result = $service->create($request)) {
+
+            return response()->json(['error' => 'ticket_reply_not_created'], 500);
+        }
+
+        return response()->json(['response' => $result], 201);
+
 
     }
 

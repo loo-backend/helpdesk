@@ -12,13 +12,13 @@ class TicketClientListAndPaginateService
         '_id',
         'subject',
         'description',
-        'credentials_open_ticket_client',
+        'credentials',
         'departament_id',
         'priority_id',
         'status_id',
-        'read_departament',
-        'read_staff',
-        'last_action',
+        'read_support',
+        'read_client',
+        'submitted_by',
         'answered_at',
         'updated_at',
         'created_at'
@@ -50,7 +50,7 @@ class TicketClientListAndPaginateService
         return $this->ticket
             ->select($this->select)
             ->where([
-                'credentials_open_ticket_client.client_uuid' => $request->get('client_uuid')
+                'credentials.client_uuid' => $request->get('client_uuid')
             ])
             ->where('active', true)
             ->where('status_id', '!=', 4)
@@ -72,7 +72,7 @@ class TicketClientListAndPaginateService
         return $this->ticket
             ->select($this->select)
             ->where([
-                'credentials_open_ticket_client.client_uuid' => $request->get('client_uuid')
+                'credentials.client_uuid' => $request->get('client_uuid')
             ])
             ->where('active', true)
             ->where('status_id', '!=', 4)
@@ -93,8 +93,7 @@ class TicketClientListAndPaginateService
 
         return $this->ticket
             ->select($this->select)
-            ->where([
-                'credentials_open_ticket_client.client_uuid' => $request->get('client_uuid')
+            ->where(['credentials.client_uuid' => $request->get('client_uuid')
             ])
             ->where('active', true)
             ->where('status_id', '=', 4)

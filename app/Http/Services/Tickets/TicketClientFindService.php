@@ -18,8 +18,7 @@ class TicketClientFindService
     public function findByAndCredentialsClient($id, Request $request)
     {
         return Ticket::where('_id', $id)
-            ->where([
-                'credentials_open_ticket_client.client_uuid' => $request->get('client_uuid')
+            ->where(['credentials.client_uuid' => $request->get('client_uuid')
             ])->first();
     }
 

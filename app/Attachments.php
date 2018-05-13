@@ -2,9 +2,9 @@
 
 namespace Helpdesk;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Attachments extends Model
+class Attachments extends Eloquent
 {
     protected $table = 'attachments';
 }
