@@ -11,4 +11,5 @@ class Priority extends Eloquent
     	'name',
     	'active',
     ];
+
 }

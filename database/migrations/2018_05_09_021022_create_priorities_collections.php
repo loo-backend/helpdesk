@@ -42,5 +42,6 @@ class CreatePrioritiesCollections extends Migration
             $collection->drop();
         });
     }
+
 }
 

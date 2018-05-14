@@ -49,4 +49,5 @@ class PriorityCollectionSeeder extends Seeder
     	];
 
     }
+
 }

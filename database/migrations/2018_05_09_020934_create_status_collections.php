@@ -42,4 +42,5 @@ class CreateStatusCollections extends Migration
             $collection->drop();
         });
     }
+
 }

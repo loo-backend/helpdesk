@@ -14,4 +14,5 @@ class Status extends Eloquent
     	'name',
     	'active',
     ];
+
 }

@@ -25,7 +25,6 @@ class Ticket extends Eloquent
             'ext',
         ],
         'replies' => [
-
             'submitted_by',
             'credentials' => [
                 'staff_uuid',

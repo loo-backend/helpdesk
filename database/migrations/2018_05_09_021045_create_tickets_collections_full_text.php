@@ -56,4 +56,5 @@ class CreateTicketsCollectionsFullText extends Migration
             $collection->drop();
         });
     }
+
 }

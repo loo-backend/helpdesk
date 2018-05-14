@@ -14,4 +14,5 @@ class TicketCollectionSeeder extends Seeder
     {
         factory(Ticket::class, 100)->create();
     }
+
 }

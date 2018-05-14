@@ -12,4 +12,5 @@ class Department extends Eloquent
     	'email',
     	'active',
     ];
+
 }

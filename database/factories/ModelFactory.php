@@ -23,7 +23,6 @@ $factory->define(Helpdesk\Department::class, function (Faker $faker) {
 
 });
 
-
 $factory->define(Helpdesk\Priority::class, function (Faker $faker) {
 
     return [
@@ -39,7 +38,6 @@ $factory->define(Helpdesk\Status::class, function (Faker $faker) {
     ];
 
 });
-
 
 $factory->define(Helpdesk\Ticket::class, function (Faker $faker) {
 

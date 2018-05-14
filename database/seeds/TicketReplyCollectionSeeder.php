@@ -52,4 +52,5 @@ class TicketReplyCollectionSeeder extends Seeder
         ];
 
     }
+
 }

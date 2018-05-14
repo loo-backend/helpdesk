@@ -42,4 +42,5 @@ class CreateDepartmentsCollections extends Migration
             $collection->drop();
         });
     }
+
 }
